@@ -1,6 +1,6 @@
 ;Filename: Mirror-decoder.nasm
 ;Author:  MrSquid
-;Purpose: Decoder for shellcodes encoded using Reverse-encoder.py
+;Purpose: Decoder for shellcodes encoded using Mirror_encoder.py
 
 global _start			
 
