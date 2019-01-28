@@ -1,4 +1,8 @@
 #!/bin/bash
+#Filename: mirror-decoder-compile.sh
+#Author:  MrSquid
+#Purpose: Assemble mirror-decode.nasm, compile shellcode and execute it. 
+
 
 echo '[+] Assembling with Nasm ... '
 nasm -f elf32 -o $1.o $1.nasm
