@@ -5,7 +5,7 @@ Create a custom encoding scheme like the “InserSon Encoder” we showed you.
 PoC with using execve-stack as the shellcode to encode with your schema and execute.
 
 Solution: 
-  1) Compile execve-stack.nasm and obtain the shellcode by running objdump.
+  1) Compile execve-stack.nasm and obtain the shellcode by running objdump. /n
     1.1) nasm -f elf32 -o execve.o execve.nasm
     1.2) ld -o execve execve.o
     1.3) objdump -d ./execve|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-6 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/"/'|sed 's/$/"/g'
