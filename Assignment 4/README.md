@@ -2,9 +2,9 @@
 
 What to do:
 
-+Create a custom encoding scheme like the “InserSon Encoder” we showed you. 
+⋅⋅*Create a custom encoding scheme like the “InserSon Encoder” we showed you. 
 
-+PoC with using execve-stack as the shellcode to encode with your schema and execute.
+⋅⋅*PoC with using execve-stack as the shellcode to encode with your schema and execute.
 
 Solution: 
   1) Compile execve-stack.nasm and obtain the shellcode by running objdump. 
@@ -17,5 +17,6 @@ Solution:
   
   2) Copy the output of objdump to our python script (Mirror_Encoder.py)
   3) Run the scrip, copy the generated shellcode to our shellcode.c script and compile it.
-  gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
+  
+    gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
   4) Create a nasm code to revert the encoder and execute correctly the orginal shellcode.
