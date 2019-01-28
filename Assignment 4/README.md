@@ -1,4 +1,4 @@
-#Assignment 4
+# Assignment 4
 
 Create a custom encoding scheme like the “InserSon Encoder” we showed you. 
 
