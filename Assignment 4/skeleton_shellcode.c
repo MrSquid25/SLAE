@@ -3,7 +3,7 @@
 
 unsigned char code[] = \
 
-shellcode;
+shellcode; //This will be replaced with the "mirrored" shellcode
 main()
 {
 
