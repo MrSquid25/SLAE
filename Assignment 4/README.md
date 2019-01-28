@@ -2,7 +2,7 @@
 
 What to do:
 
--Create a custom encoding scheme like the “InserSon Encoder” we showed you. 
+-Create a custom encoding scheme like the “Insertion Encoder” we showed you. 
 
 -PoC with using execve-stack as the shellcode to encode with your schema and execute.
 
@@ -16,7 +16,7 @@ Solution:
     objdump -d ./execve|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-6 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/"/'|sed 's/$/"/g'
   
   2) Copy the output of objdump to our python script (Mirror_Encoder.py)
-  3) Run the scrip, copy the generated shellcode to our shellcode.c script and compile it.
+  3) Run the scrip (Mirror_Encoder.py), copy the generated shellcode to our C script (skeleton_shellcode.c) and compile it.
   
     gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
-  4) Create a nasm code to revert the encoder and execute correctly the orginal shellcode.
+  4) Create a nasm code (mirror-decode.nasm) to revert the encoder and execute correctly the orginal shellcode.
