@@ -2,9 +2,9 @@
 
 What to do:
 
-⋅⋅*Create a custom encoding scheme like the “InserSon Encoder” we showed you. 
+-Create a custom encoding scheme like the “InserSon Encoder” we showed you. 
 
-⋅⋅*PoC with using execve-stack as the shellcode to encode with your schema and execute.
+-PoC with using execve-stack as the shellcode to encode with your schema and execute.
 
 Solution: 
   1) Compile execve-stack.nasm and obtain the shellcode by running objdump. 
