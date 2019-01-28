@@ -19,7 +19,7 @@ decoder:
 decode:
 	mov ax, [esi]                ; Moves the first to bytes of esi to ax
 	mov cx, ax		     ;Moves ax to cx to check if it is the end of the shellcode
-	xor cx, 0xf0f0               ; compare cx with 0xf0f0 marker
+	xor cx, 0xf0f0               ; Compare cx with 0xf0f0 marker
 	jz short EncodedShellcode    ; if xor os 0, jump to shellcode
 	mov byte [edi], ah           ;Move the second byte to the first byte of edi
 	mov byte [edi + 1], al;      ; Move the first byte to the second byte of edi --> 0x31c0 moves to 0xc031 in edi 	
@@ -30,8 +30,8 @@ decode:
 	jmp short decode	     ; jump back to start of decode
 	
 	
+;Modifications can be vieweb by using x/20xc *call during execution (gdb)	
 	
-;Las modificaciones se van viendo sobre el offset de esi x/20xb *call		
     	
 
 	
