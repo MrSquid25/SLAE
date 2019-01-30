@@ -1,11 +1,12 @@
 # Assignment 3
 
-What to do:
+## What to do:
+
 -Study about the Egg Hunter shellcode
 -Create a working demo of the Egghunter
 -Should be configurable for different payloads
 
-Solutions:
+## Solutions:
 
 1) Study about the Egg Hunter of the shellcode. There is a paper where it is perfectly explained, you can found it at: http://www.hick.org/code/skape/papers/egghunt-shellcode.pdf
 
