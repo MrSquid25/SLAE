@@ -82,11 +82,11 @@ After that, we must compile the code using compile.sh. This bash script will do 
 
         objdump=$(objdump -d ./Egg_Hunter|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-6 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/"/'|sed 's/$/"/g')
 
-3) Inject the shellcode to the c script (shellcode):
+3) Inject the output of objdump to the shellcode.c:
 
         replace "shellcode" "$objdump" -- shellcode.c &>/dev/null #Replace shellcode dump
-4) Compile the shellcode
+4) Compile the shellcode and execute it
 
         gcc -fno-stack-protector -z execstack shellcode.c -o shellcode &>/dev/null #Compile and execute the shellcode
-        
-
+     
+3) Should be configurable for different payloads:        
