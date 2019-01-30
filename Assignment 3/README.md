@@ -94,7 +94,7 @@ After that, we must compile the code using compile.sh. This bash script will do 
 As it should be configurable to different payloads, we need to modify the original shellcode script. This is the key part of the script:
 
         unsigned char egg_code[] = "shellcode" //Shellcode is replace with the content of objdump
-        unsigned char payload[] = "eggcode+eggcode+Shellcode" //eggcode is the "egg/mark" injected into the nasm code.
+        unsigned char payload[] = "eggcode+eggcode+bind/reverse shell c code" //eggcode is the "egg/mark" injected into the nasm code.
 
         main()
         {
