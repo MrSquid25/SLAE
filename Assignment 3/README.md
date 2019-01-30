@@ -40,7 +40,7 @@ Nasm code given as a reproduction of the Egg Hunter using this technique:
 
 2) Create the nasm code that will reproduce the eggcode.
 
-Now that we know the exact structure for the egg hunter, we need to create the nasm code. Taking advadtange of the code from the paper, here is the final code.
+Now that we know the exact structure for the egg hunter, we need to create the nasm code. Using this schema, here is the final code.
 
         global _start 
 
