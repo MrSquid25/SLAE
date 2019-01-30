@@ -2,6 +2,8 @@
 
 Repository for the SLAE Exam Assignments.
 
-All code is related to the SLAE course - http://www.securitytube-training.com/online-courses/securitytube-linux-assembly-expert/index.html
+This blog post has been created for completing the requirements of the SecurityTube Linux Assembly Expert certification: 
+
+http://www.securitytube-training.com/online-courses/securitytube-linux-assembly-expert/index.html
 
 Student ID: PA-8309
