@@ -69,7 +69,7 @@ Now that we know the exact structure for the egg hunter, we need to create the n
 
 After that, we must compile the code using compile.sh. This bash script will do the following:
 
-2.1) Assembly and link the nasm code:
+..* 2.1) Assembly and link the nasm code:
 
         echo '[+] Assembling with Nasm ... '
         nasm -f elf32 -o Egg_Hunter.o Egg_Hunter.nasm
