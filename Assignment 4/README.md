@@ -36,9 +36,9 @@
    
    3) Create the nasm decoder.
    
-   * The shellcode obtained in the earlier step, must be passed to Mirror_Encoder.py where is "mirrored".
+* The shellcode obtained in the earlier step, must be passed to Mirror_Encoder.py where is "mirrored".
    
-   * Now, we have the shellcode to inject into the Mirror_decoder.nasm
+* Now, we have the shellcode to inject into the Mirror_decoder.nasm
    
    ###### Mirror-decoder-compile.sh
   
