@@ -69,7 +69,7 @@ Now that we know the exact structure for the egg hunter, we need to create the n
 
 After that, we must compile the code using compile.sh. This bash script will do the following:
 
-1) Assembly and link the nasm code:
+2.1) Assembly and link the nasm code:
 
         echo '[+] Assembling with Nasm ... '
         nasm -f elf32 -o Egg_Hunter.o Egg_Hunter.nasm
@@ -78,15 +78,31 @@ After that, we must compile the code using compile.sh. This bash script will do 
         ld -o Egg_Hunter Egg_Hunter.o
 
         echo '[+] Done!'
-2) Obtain the shellcode from the binary created:
+2.2) Obtain the shellcode from the binary created:
 
         objdump=$(objdump -d ./Egg_Hunter|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-6 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/"/'|sed 's/$/"/g')
 
-3) Inject the output of objdump to the shellcode.c:
+2.3) Inject the output of objdump to the shellcode.c:
 
         replace "shellcode" "$objdump" -- shellcode.c &>/dev/null #Replace shellcode dump
-4) Compile the shellcode and execute it
+2.4) Compile the shellcode and execute it
 
         gcc -fno-stack-protector -z execstack shellcode.c -o shellcode &>/dev/null #Compile and execute the shellcode
      
-3) Should be configurable for different payloads:        
+3) Should be configurable for different payloads:   
+
+As it should be configurable to different payloads, we need to modify the original shellcode script. This is the key part of the script:
+
+        unsigned char egg_code[] = "shellcode" //Shellcode is replace with the content of objdump
+        unsigned char payload[] = "eggcode+eggcode+Shellcode" //eggcode is the "egg/mark" injected into the nasm code.
+
+        main()
+        {
+                printf("Eggcode Length:  %d\n", strlen(egg_code));
+                printf("Payload Length:  %d\n", strlen(payload));
+
+                int (*ret)() = (int(*)())egg_code;
+
+                ret();
+
+        }
