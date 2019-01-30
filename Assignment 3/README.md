@@ -49,7 +49,7 @@ Now that we know the exact structure for the egg hunter, we need to create the n
         _start: 
 
         alignment:  
-                or cx,0xfff         ; Page alingment
+                or cx,0xfff         ; Page alignment
 
         search_shell:  
                 inc ecx             ; Increment our page alignment (space "created" where the shellcode will be executed)
