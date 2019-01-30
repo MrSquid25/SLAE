@@ -20,6 +20,8 @@ As it is said in the paper, is a virtual address space where we can inject the c
 
 ### Sigaction implementation
 
+Nasm code given as a reproduction of the Egg Hunter using this technique:
+
         00000000  6681C9FF0F        or cx,0xfff
         00000005  41                inc ecx
         00000006  6A43              push byte +0x43
