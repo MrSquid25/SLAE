@@ -16,7 +16,7 @@ All the information used to solve this section was found at [Safely Searching Pr
 
 First of all, what is an Egg Hunter?
 
-As it is said in the paper, is a virtual address space where we can inject the code/payload which couldn't anywhere in the current process. The egg is the marker that helps the payload to be located by the exploit. In this case, the sigaction method is the one selected to be implemented.
+As it is said in the paper, is a virtual address space where we can inject the code/payload in the current process. The egg is the marker that helps the payload to be located by the exploit. In this case, the sigaction method is the one selected to be implemented.
 
 ### Sigaction implementation
 
