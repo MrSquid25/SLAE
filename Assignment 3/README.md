@@ -67,7 +67,7 @@ Now that we know the exact structure for the egg hunter, we need to create the n
                 jnz search_shell
                 jmp edi             ; We found our egg identifier, pass execution
 
-After that, we must compile the code using compile.sh. This bash script will do the following:
+After that, we must compile the code using compile_egghunter.sh. This bash script will do the following:
 
    * 2.1) Assembly and link the nasm code:
 
