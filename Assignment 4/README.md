@@ -11,7 +11,8 @@
   
   The encoder created (Mirror_encoder.py) takes the every 4 bytes of the shellcode and reverse its order, meaning, if the string taken is 0x45a3, the resultant will be 0xa345 (this is done until the end of the shellcode is reached). In case the shellcode has not even length, 0xf0 is added to the end of the shellcode to allow the "mirror" modification. 0xf0f0 is appended to the final shellcode as the marker which will be used to stop the nasm decoder.
     
-    #########Mirror-Encoder.py
+  ######### Mirror-Encoder.py
+  
     for x in bytearray(shellcode):  #Add to shell the shellcode as hexadecimal format
       shell += '\\x' + '%02x' % x
 
@@ -39,7 +40,8 @@
    
    * Now, we have the shellcode to inject into the Mirror_decoder.nasm
    
-    #########mirror-decoder-compile.sh
+  ######### Mirror-decoder-compile.sh
+  
     global _start			
 
     section .text
@@ -76,9 +78,10 @@
 
 4) Compiling the final shellcode
     
-    * Once the nasm code is finished, we can use mirror-decoder-compile.sh to assembly and link it, copy the shellcode to the skeleton_shellcode.c, compile the final shellcode and execute it.
+* Once the nasm code is finished, we can use mirror-decoder-compile.sh to assembly and link it, copy the shellcode to the skeleton_shellcode.c, compile the final shellcode and execute it.
    
-          #########Mirror-decoder-compile.sh
+    ######### Mirror-decoder-compile.sh
+    
           echo '[+] Assembling with Nasm ... '
           nasm -f elf32 -o mirror-decode.o mirror-decode.nasm
 
@@ -107,7 +110,4 @@
           gcc -fno-stack-protector -z execstack shellcode.c -o shellcode &>/dev/null #Compile and execute the shellcode
 
 
-          ./shellcode
-
-
-      
+          ./shellcode    
