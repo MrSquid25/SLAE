@@ -9,7 +9,7 @@
 ## Solution: 
   1) Create a custom encoding scheme like the “Insertion Encoder” we showed you.
   
-  The encoder created (Mirror_encoder.py) takes the every 4 bytes of the shellcode and reverse its order, meaning, if the string taken is 0x45a3, the resultant will be 0xa345. This is done until the end of the shellcode. In case the shellcode has not even length, 0xf0 is added to the end of the shellcode to allow the "mirror" modification. 0xf0f0 is appended to the final shellcode as the marker which will be used to stop the nasm decoder.
+  The encoder created (Mirror_encoder.py) takes the every 4 bytes of the shellcode and reverse its order, meaning, if the string taken is 0x45a3, the resultant will be 0xa345 (this is done until the end of the shellcode is reached). In case the shellcode has not even length, 0xf0 is added to the end of the shellcode to allow the "mirror" modification. 0xf0f0 is appended to the final shellcode as the marker which will be used to stop the nasm decoder.
   
     for x in bytearray(shellcode):  #Add to shell the shellcode as hexadecimal format
       shell += '\\x' + '%02x' % x
