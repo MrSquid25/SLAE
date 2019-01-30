@@ -1,5 +1,5 @@
 #!/bin/bash
-#Filename: Compile.sh
+#Filename: compile_egghunter.sh
 #Author: MrSquid
 #Purpose: Assembly any nasm code. In this case, Egg_Hunter.nasm
 
