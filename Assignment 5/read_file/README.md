@@ -39,7 +39,7 @@ Let's analyze the content of this step by step.
 
         00000007  5B                pop ebx ; The content of the top of the stack is set to ebx, in this case, /etc/passwd).
 
-
+        ![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%205/read_file/pop_ebx.PNG)
         00000008  31C9              xor ecx,ecx
         0000000A  CD80              int 0x80
         0000000C  89C3              mov ebx,eax
