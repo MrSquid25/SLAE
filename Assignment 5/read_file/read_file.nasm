@@ -1,5 +1,5 @@
 ;Filename: read_file.nasm
-;Nasm code obtained from: msfvenom -p linux/x86/read_file PATH=/etc/passwd -f c => Compile shellcode, run gbd, break at &code and use disassemble. 
+;Nasm code obtained from: msfvenom -p linux/x86/read_file PATH=/etc/passwd -f raw |ndisas -u -
 ;Author: MrSquid
 
 global _start 
