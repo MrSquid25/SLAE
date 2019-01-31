@@ -12,6 +12,16 @@
 
 Each solution follows the same steps:
 
-1) Obtain the shellcode of every sample using the following command
-  
-    msfvenom -p linux/x86/exec CMD=whoami -f c
+GDB analysis:
+
+   1) Obtain the shellcode of every sample using the following command
+
+            * msfvenom -p linux/x86/* -f c (where * is the payload selected)
+
+    2) Copy the output to shellcode.c and compile it
+
+            * gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
+
+    3) Run the binary with GDB, set a breakpoint at &code, run it and copy the nasm code.
+
+    4) Study it!
