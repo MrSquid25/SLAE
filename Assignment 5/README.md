@@ -12,7 +12,7 @@
 
 Each solution follows the same steps:
 
-GDB analysis:
+###### GDB analysis:
 
    1) Obtain the shellcode of every sample using the following command
 
@@ -34,7 +34,7 @@ GDB analysis:
 
    4) Study it!
 
-Libemu Analysis:
+###### Libemu Analysis:
 
    1) Run the following command to obtain the analysis using Libenum Sctest:
    
@@ -44,7 +44,7 @@ Libemu Analysis:
             
             dot bindshell.dot -Tpng -o bindshell.png
 
-Ndisasm Analysis:
+###### Ndisasm Analysis:
 
    1) Run the following command to obtain the disassembly code:
    
