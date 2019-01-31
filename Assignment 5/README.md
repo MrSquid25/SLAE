@@ -16,12 +16,38 @@ GDB analysis:
 
    1) Obtain the shellcode of every sample using the following command
 
-            * msfvenom -p linux/x86/* -f c (where * is the payload selected)
+             msfvenom -p linux/x86/* -f c (where * is the payload selected)
 
-    2) Copy the output to shellcode.c and compile it
+   2) Copy the output to shellcode.c and compile it
 
             * gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
 
-    3) Run the binary with GDB, set a breakpoint at &code, run it and copy the nasm code.
+   3) Run the binary with GDB, set a breakpoint at &code, run it and copy the nasm code.
+   
+            gdb -q ./shellcode
+            
+            break *&code
+            
+            run
+            
+            disassemble
 
-    4) Study it!
+   4) Study it!
+
+Libemu Analysis:
+
+   1) Run the following command to obtain the analysis using Libenum Sctest:
+   
+            msfvenom -p linux/x86/* (whatever instructions needs) -f raw | ./sctest -vvv -Ss 100000 -G bindshell.dot
+            
+   2) Convert .dot file to .png file (graphic flow of the instructions followed by the nasm code)
+            
+            dot bindshell.dot -Tpng -o bindshell.png
+
+Ndisasm Analysis:
+
+   1) Run the following command to obtain the disassembly code:
+   
+            msfvenom -p linux/x86/* (whatever instructions needs) -f raw | ndisasm -u -
+            
+Whatever option you decide is correct. In my case, I chose both options 1 and 2. Read_file, chmod and execve are the payloads selected to study using these mechanisms.
