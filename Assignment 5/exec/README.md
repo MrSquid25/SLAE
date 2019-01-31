@@ -31,7 +31,7 @@ If we analyze the nasm code, we can reach the following conclusions:
           
           EAX is set to 11 (xb in decimal) which is execve. 
       
-2)    cdq
+2)    cwd
 
       push edx
             
