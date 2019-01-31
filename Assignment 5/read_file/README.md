@@ -1,6 +1,6 @@
 # Solution
 
-If we dump the nasm code from the payload, here is what we can see:
+If we dump the nasm code from the payload (msfvenom -p linux/x86/read_file PATH=/etc/passwd -f raw | ndisasm -u -), here is what we can see:
 
     00000000  EB36              jmp short 0x38
     00000002  B805000000        mov eax,0x5
