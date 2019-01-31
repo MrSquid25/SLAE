@@ -1,3 +1,7 @@
+//Filename: skeleton_shellcode.c
+//Author:  MrSquid
+//Purpose: Skeleton shellcode that generates a file named shellcode with the shellcode given to the compiler 
+
 #include<stdio.h>
 #include<string.h>
 
