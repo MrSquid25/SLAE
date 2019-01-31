@@ -4,7 +4,7 @@ Using exec_compile.sh, the final shellcode is generated and executed. We can use
 
 Using Libemu, we can obtain the next image of the process flow:
 
-![alt text] (https://github.com/MrSquid25/SLAE/blob/master/Assignment%205/exec/exec.png "Flow")
+![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%205/exec/exec.png "Flow")
 
 If we analyze the nasm code, we can reach the following conclusions:
 
