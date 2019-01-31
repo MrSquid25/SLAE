@@ -31,50 +31,87 @@ If we dump the nasm code from the payload (msfvenom -p linux/x86/read_file PATH=
 
 Let's analyze the content of this step by step.
 
-   1) 00000000  EB36              jmp short 0x38 ; Jump to 0x38 
+   1) 00000000  EB36              jmp short 0x38 
+   
+    Jump to 0x38 
 
-   2) 00000038  E8C5FFFFFF        call 0x2 ; Execute 0x2
+   2) 00000038  E8C5FFFFFF        call 0x2 
+   
+    Execute 0x2
 
-   3)  00000002  B805000000        mov eax,0x5 ; 5 is set to EAX <=> Syscall, function open selected
+   3)  00000002  B805000000        mov eax,0x5 
+   
+       00000007  5B                pop ebx 
 
-       00000007  5B                pop ebx ; The content of the top of the stack is set to ebx, 
-                                            ; in this case, /etc/passwd).
+           5 is set to EAX <=> Syscall, function open selected
+
+           The content of the top of the stack is set to ebx, 
+
+           in this case, /etc/passwd).
     
-![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%205/read_file/pop_ebx.PNG "Pop Ebx")
+![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%205/read_file/pop_ebx.png "Pop Ebx")
 
-   4)  00000008  31C9              xor ecx,ecx ; Clearing out ecx, now is 0
+   4)  00000008  31C9              xor ecx,ecx 
+   
+    Clearing out ecx, now is 0
        
-   5)  0000000A  CD80              int 0x80 ; int open(const char *pathname, int flags); open(/etc/passwd, 0) 
+   5)  0000000A  CD80              int 0x80 
    
-       where EAX is 5=OPEN, EBX is etc/passwd=PATH and ECX is 0=FLAGS
+    int open(const char *pathname, int flags); open(/etc/passwd, 0) 
    
-   6) 0000000C  89C3              mov ebx,eax ; Eax is set to ebx
+    where EAX is 5=OPEN, EBX is etc/passwd=PATH and ECX is 0=FLAGS
    
-   7) 0000000E  B803000000        mov eax,0x3  ; Eax is set to 3 <=> Syscall, function read selected
+   6) 0000000C  89C3              mov ebx,eax 
+    
+    Eax is set to ebx
    
-   8) 00000013  89E7              mov edi,esp ; Top of stack set to edi;
+   7) 0000000E  B803000000        mov eax,0x3  
    
-   9) 00000015  89F9              mov ecx,edi ; Edi set to ecx;
+    Eax is set to 3 <=> Syscall, function read selected
    
-   10) 00000017  BA00100000        mov edx,0x1000 ; Edx set to 4096 (decimal)
+   8) 00000013  89E7              mov edi,esp 
    
-   11) 0000001C  CD80              int 0x80 Read function executed --> ssize_t read(int fd, void *buf, size_t count);
+    Top of stack set to edi;
+   
+   9) 00000015  89F9              mov ecx,edi 
+   
+    Edi set to ecx;
+   
+   10) 00000017  BA00100000        mov edx,0x1000 
+   
+    Edx set to 4096 (decimal)
+   
+   11) 0000001C  CD80              int 0x80 
+   
+    Read function executed --> ssize_t read(int fd, void *buf, size_t count);
    
     EAX=3=READ,EBX=3=FD, ECX=EDI=BUF, EDX=4096=COUNT
    
-   12) 0000001E  89C2              mov edx,eax ; EDX set to EAX
+   12) 0000001E  89C2              mov edx,eax 
    
-   13) 00000020  B804000000        mov eax,0x4 ; Eax to 4 <=> Syscall, function write
+    EDX set to EAX
    
-   14) 00000025  BB01000000        mov ebx,0x1 ; Ebx=1
+   13) 00000020  B804000000        mov eax,0x4 
    
-   15) 0000002A  CD80              int 0x80 ; ssize_t write(int fd, const void *buf, size_t count);
+    Eax to 4 <=> Syscall, function write
+   
+   14) 00000025  BB01000000        mov ebx,0x1 
+   
+    Ebx=1
+   
+   15) 0000002A  CD80              int 0x80 
+   
+    ssize_t write(int fd, const void *buf, size_t count);
  
     In this case, is just called but no writing is done.
  
-   16) 0000002C  B801000000        mov eax,0x1 ; Exit called
+   16) 0000002C  B801000000        mov eax,0x1 
+   
+    Exit called
    
    17) 00000031  BB00000000        mov ebx,0x0
    
-   18) 00000036  CD80              int 0x80 ; Execution of exit 
+   18) 00000036  CD80              int 0x80 
+   
+    Execution of exit 
    
