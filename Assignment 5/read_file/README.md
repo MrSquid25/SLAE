@@ -31,23 +31,22 @@ If we dump the nasm code from the payload, here is what we can see:
 
 Let's analyze the content of this step by step.
 
-    1) 00000000  EB36              jmp short 0x38 ; Jump to 0x38 
+   1) 00000000  EB36              jmp short 0x38 ; Jump to 0x38 
 
-    2) 00000038  E8C5FFFFFF        call 0x2 ; Execute 0x2
+   2) 00000038  E8C5FFFFFF        call 0x2 ; Execute 0x2
 
-    3)  00000002  B805000000        mov eax,0x5 ; 5 is set to EAX <=> Syscall, function open selected
+   3)  00000002  B805000000        mov eax,0x5 ; 5 is set to EAX <=> Syscall, function open selected
 
-        00000007  5B                pop ebx ; The content of the top of the stack is set to ebx, in this case, /etc/passwd).
-    
+       00000007  5B                pop ebx ; The content of the top of the stack is set to ebx, 
+                                            ; in this case, /etc/passwd).
     
 ![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%205/read_file/pop_ebx.PNG "Pop Ebx")
-        
-        
-        00000008  31C9              xor ecx,ecx
-        0000000A  CD80              int 0x80
-        0000000C  89C3              mov ebx,eax
-        0000000E  B803000000        mov eax,0x3
-        00000013  89E7              mov edi,esp
-        00000015  89F9              mov ecx,edi
-        00000017  BA00100000        mov edx,0x1000
-        0000001C  CD80              int 0x80
+       00000008  31C9              xor ecx,ecx ; Clearing out ecx, now is 0
+       0000000A  CD80              int 0x80 ; int open(const char *pathname, int flags); open(/etc/passwd, 0) 
+       where EAX is 5, EBX is etc/passwd and ECX is 0
+       0000000C  89C3              mov ebx,eax ; Eax is set to ebx
+       0000000E  B803000000        mov eax,0x3  ; Eax is set to 3 <=> Syscall, function 
+       00000013  89E7              mov edi,esp
+       00000015  89F9              mov ecx,edi
+       00000017  BA00100000        mov edx,0x1000
+       0000001C  CD80              int 0x80
