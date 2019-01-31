@@ -60,4 +60,4 @@ If we analyze the nasm code, we can reach the following conclusions:
       
       int 0x80
       
-        Exit function is called and the process exits quietly.
+            Exit function is called and the process exits quietly.
