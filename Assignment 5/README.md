@@ -50,4 +50,4 @@ Ndisasm Analysis:
    
             msfvenom -p linux/x86/* (whatever instructions needs) -f raw | ndisasm -u -
             
-Whatever option you decide is correct. In my case, I chose both options 1 and 2. Read_file, chmod and execve are the payloads selected to study using these mechanisms.
+Whatever option you decide is correct. In my case, I chose every option available. Read_file, chmod and execve are the payloads selected to study using these mechanisms.
