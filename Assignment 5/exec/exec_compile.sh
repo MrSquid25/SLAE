@@ -1,8 +1,12 @@
 #!/bin/bash
 
+#Filename: exec_compile.sh
+#Author:  MrSquid
+#Purpose: Obtaing shellcode from msfvenom, compile shellcode and execute it.
+
 echo "[+] Generating code using metasploit..."
 
-#code=$(msfvenom -p linux/x86/exec CMD=whoami -f c)
+#msfvenom -p linux/x86/exec CMD=whoami -f c => shellcode => gdb 
 
 #Obtaining shellcode from msfvenom and defining objdump variable with it
 
