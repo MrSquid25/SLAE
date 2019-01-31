@@ -49,7 +49,7 @@ Let's analyze the content of this step by step.
 
            in this case, /etc/passwd).
     
-![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%205/read_file/pop_ebx.png "Pop Ebx")
+        ![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%205/read_file/pop_ebx.png "Pop Ebx")
 
    4)  00000008  31C9              xor ecx,ecx 
    
