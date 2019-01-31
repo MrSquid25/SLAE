@@ -42,39 +42,39 @@ Let's analyze the content of this step by step.
     
 ![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%205/read_file/pop_ebx.PNG "Pop Ebx")
 
-   00000008  31C9              xor ecx,ecx ; Clearing out ecx, now is 0
+   4)  00000008  31C9              xor ecx,ecx ; Clearing out ecx, now is 0
        
-   0000000A  CD80              int 0x80 ; int open(const char *pathname, int flags); open(/etc/passwd, 0) 
+   5)  0000000A  CD80              int 0x80 ; int open(const char *pathname, int flags); open(/etc/passwd, 0) 
    
-   where EAX is 5=OPEN, EBX is etc/passwd=PATH and ECX is 0=FLAGS
+       where EAX is 5=OPEN, EBX is etc/passwd=PATH and ECX is 0=FLAGS
    
-   0000000C  89C3              mov ebx,eax ; Eax is set to ebx
+   6) 0000000C  89C3              mov ebx,eax ; Eax is set to ebx
    
-   0000000E  B803000000        mov eax,0x3  ; Eax is set to 3 <=> Syscall, function read selected
+   7) 0000000E  B803000000        mov eax,0x3  ; Eax is set to 3 <=> Syscall, function read selected
    
-   00000013  89E7              mov edi,esp ; Top of stack set to edi;
+   8) 00000013  89E7              mov edi,esp ; Top of stack set to edi;
    
-   00000015  89F9              mov ecx,edi ; Edi set to ecx;
+   9) 00000015  89F9              mov ecx,edi ; Edi set to ecx;
    
-   00000017  BA00100000        mov edx,0x1000 ; Edx set to 4096 (decimal)
+   10)00000017  BA00100000        mov edx,0x1000 ; Edx set to 4096 (decimal)
    
-   0000001C  CD80              int 0x80 Read function executed --> ssize_t read(int fd, void *buf, size_t count);
+   11)0000001C  CD80              int 0x80 Read function executed --> ssize_t read(int fd, void *buf, size_t count);
    
-   EAX=3=READ,EBX=3=FD, ECX=EDI=BUF, EDX=4096=COUNT
+   ;EAX=3=READ,EBX=3=FD, ECX=EDI=BUF, EDX=4096=COUNT
    
-   0000001E  89C2              mov edx,eax ; EDX set to EAX
+   12) 0000001E  89C2              mov edx,eax ; EDX set to EAX
    
-   00000020  B804000000        mov eax,0x4 ; Eax to 4 <=> Syscall, function write
+   13) 00000020  B804000000        mov eax,0x4 ; Eax to 4 <=> Syscall, function write
    
-   00000025  BB01000000        mov ebx,0x1 ; Ebx=1
+   14) 00000025  BB01000000        mov ebx,0x1 ; Ebx=1
    
-   0000002A  CD80              int 0x80 ; ssize_t write(int fd, const void *buf, size_t count);
+   15) 0000002A  CD80              int 0x80 ; ssize_t write(int fd, const void *buf, size_t count);
  
    ; In this case, the function called is not executed as a write, is just called but no writing is done.
  
-   0000002C  B801000000        mov eax,0x1 ; Exit called
+   16) 0000002C  B801000000        mov eax,0x1 ; Exit called
    
-   00000031  BB00000000        mov ebx,0x0
+   17) 00000031  BB00000000        mov ebx,0x0
    
-   00000036  CD80              int 0x80 ; Execution of exit 
+   18) 00000036  CD80              int 0x80 ; Execution of exit 
    
