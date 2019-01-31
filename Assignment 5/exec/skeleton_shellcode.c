@@ -1,6 +1,10 @@
 #include<stdio.h>
 #include<string.h>
 
+//Filename: skeleton_shellcode.c
+//Author:  MrSquid
+//Purpose: Skeleton shellcode that generates a file named shellcode within the shellcode given to the compiler 
+
 unsigned char code[] = "shellcode";
 
 main()
