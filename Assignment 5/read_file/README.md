@@ -56,11 +56,11 @@ Let's analyze the content of this step by step.
    
    9) 00000015  89F9              mov ecx,edi ; Edi set to ecx;
    
-   10)00000017  BA00100000        mov edx,0x1000 ; Edx set to 4096 (decimal)
+   10) 00000017  BA00100000        mov edx,0x1000 ; Edx set to 4096 (decimal)
    
-   11)0000001C  CD80              int 0x80 Read function executed --> ssize_t read(int fd, void *buf, size_t count);
+   11) 0000001C  CD80              int 0x80 Read function executed --> ssize_t read(int fd, void *buf, size_t count);
    
-   ;EAX=3=READ,EBX=3=FD, ECX=EDI=BUF, EDX=4096=COUNT
+    EAX=3=READ,EBX=3=FD, ECX=EDI=BUF, EDX=4096=COUNT
    
    12) 0000001E  89C2              mov edx,eax ; EDX set to EAX
    
@@ -70,7 +70,7 @@ Let's analyze the content of this step by step.
    
    15) 0000002A  CD80              int 0x80 ; ssize_t write(int fd, const void *buf, size_t count);
  
-   ; In this case, the function called is not executed as a write, is just called but no writing is done.
+    In this case, is just called but no writing is done.
  
    16) 0000002C  B801000000        mov eax,0x1 ; Exit called
    
