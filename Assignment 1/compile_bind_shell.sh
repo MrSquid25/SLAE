@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#Filename: compile_bind_shell.sh
+#Author:  MrSquid
+#Purpose: Bind shell compiler. Filename and Port are easily configurable (see usage)
+
+
 if [ -z $2 ]; then
 	echo "Usage ./compile.sh FILENAME PORT"
 else
