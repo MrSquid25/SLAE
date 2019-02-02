@@ -4,7 +4,7 @@ if __name__ == "__main__":
 	print "[*] Usage: python bind_shell.py PORT_NUMBER\n"
 	print "[*] Example: python bind_shell.py 8888\n"
 	try:
-		lport = int(sys.argv[1]) #sys.argv[0] es el nombre del programa
+		lport = int(sys.argv[1]) #sys.argv[0] is filename
 		if lport <= 1024:	
 			print "Port number must be greater than 1024 (root privileges needed instead)"
 		elif (1024<lport and lport<=65535):
