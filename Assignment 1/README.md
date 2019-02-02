@@ -116,3 +116,5 @@ So, we only need to modify this line every time we want to change the listening 
 
 To do that easily, you can use compile_bind_shell.sh. It asks to the user the filename and the port that will be set to the final binary.
 
+The steps that follows the shell before it starts to listen, can be followed here: 
+![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%201/bindshell.png)
