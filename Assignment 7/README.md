@@ -10,11 +10,11 @@
 
 ## Solutions
 
-Crypter selected: [AES CBC Mode] (https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+Crypter selected: [AES CBC Mode](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 
 Programming language used: Python 2.7
 
-Python modules needed: [PyCrytodome] (https://pycryptodome.readthedocs.io/en/latest/index.html)
+Python modules needed: [PyCrytodome](https://pycryptodome.readthedocs.io/en/latest/index.html)
 
 There are three files:
 
@@ -24,4 +24,4 @@ There are three files:
 
 3) main.sh
 
-      Script which given a shellcode, ciphers and deciphers it using the python scripts showed before
+            Script which given a shellcode, ciphers and deciphers it using the python scripts showed before
