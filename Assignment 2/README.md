@@ -104,4 +104,4 @@ To do that easily, you can use compile_reverse_shell.sh. It asks to the user the
 
 The steps that follows the shell before it starts to listen are showed here:
 
-![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%201/reverse.png)
+![alt text](https://github.com/MrSquid25/SLAE/blob/master/Assignment%202/reverse.png)
