@@ -6,7 +6,7 @@
 
 
 if [ -z $2 ]; then
-	echo "Usage ./compile.sh FILENAME PORT"
+	echo "Usage ./compile_bind_shell.sh FILENAME PORT"
 else
 	if [ $2 -gt 65535 ] || [ 1025 -gt $2 ]; then 
 		echo "Port must be between 1025 and 65535!"
