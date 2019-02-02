@@ -19,8 +19,12 @@ Python modules needed: [PyCrytodome](https://pycryptodome.readthedocs.io/en/late
 There are three files:
 
 1) aes_shellcode_cipher.py 
+       
+       AES crypter
 
 2) aes_decode_cipher.py
+       
+       AES decrypter
 
 3) main.sh
 
