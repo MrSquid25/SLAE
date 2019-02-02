@@ -112,5 +112,7 @@ We can see that the position where the code is different is
 
       00000012  680200270F        push dword 0xf270002 (0f27 in litte endian is 27f0 which is 9999 in decimal)
 
-So, we only need to modify this line every time we want to change the listening port. To do that easily, compile_bind_shell.sh was created, which ask to the user the filename and the port you will want to be set to the final binary.
+So, we only need to modify this line every time we want to change the listening port. 
+
+To do that easily, compile_bind_shell.sh was created, which ask to the user the filename and the port that will be set to the final binary.
 
