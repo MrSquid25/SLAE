@@ -47,7 +47,7 @@ _start:
 	xchg eax,ebx
 	pop ecx
 	dup:
-		push byte +0x3f ;63 en entero
+		push byte +0x3f ;63 in decimal (systemcall dup)
 		pop eax
 		;os.dup2(rem.fileno(),0) #STDIN,STOUT,STDERR redirection 
 	    	;os.dup2(rem.fileno(),1)
