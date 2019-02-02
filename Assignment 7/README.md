@@ -24,4 +24,4 @@ There are three files:
 
 3) main.sh
 
-            Script which given a shellcode, ciphers and deciphers it using the python scripts showed before
+       Script which given a shellcode, ciphers and deciphers it using the python scripts showed before
