@@ -1,7 +1,8 @@
 #!/bin/bash
 #Filename: schema.nasm
 #Author:  MrSquid
-#Purpose: Bindshell.nasm code with port easily configurable 
+#Purpose: Bindshell.nasm code with port easily configurable (Nasm skeleton code obtain from sudo msfvenom -p linux/x86/shell_bind_tcp LPORT=9999 -b "\x00" -i 0 -f raw |ndisasm -u -
+
 
 global _start  
 
