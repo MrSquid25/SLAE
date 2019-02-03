@@ -1,5 +1,7 @@
 ## Initial nasm code
 
+Original shellcode: [Link](http://shell-storm.org/shellcode/files/shellcode-825.php)
+
 Length: 43 bytes
 
 Obtain from running: 
