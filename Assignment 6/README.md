@@ -1,6 +1,6 @@
 # Assignment 6
 
-# What to do
+## What to do
 
 • Take up 3 shellcodes from ShellStorm and create polymorphic versions of them to beat paLern matching 
 
@@ -8,7 +8,7 @@
 
 • Bonus points for making it shorter in length than original
 
-# Solutions
+## Solutions
 
 The following three shellcodes where selected to be modified to solve this exercise:
 
