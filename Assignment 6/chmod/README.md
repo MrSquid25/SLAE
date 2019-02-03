@@ -22,7 +22,7 @@ Obtain from running:
 
     
   
- ## Polymorphic shellcode
+ ## Polymorphic nasm code
 
 Length: 24 bytes  
 
