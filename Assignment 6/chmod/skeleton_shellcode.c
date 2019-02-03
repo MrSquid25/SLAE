@@ -1,8 +1,9 @@
 #include<stdio.h>
 #include<string.h>
 
-//http://shell-storm.org/shellcode/files/shellcode-566.php
-//echo -ne " "| ndisasm -u -
+//Filename: skeleton_shellcode.c
+//Author:  MrSquid
+//Purpose: Skeleton shellcode that generates a file named shellcode with the shellcode given to the compiler
 
 unsigned char code[] = SHELL;
 
