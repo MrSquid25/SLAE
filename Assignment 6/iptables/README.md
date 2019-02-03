@@ -27,7 +27,7 @@ Obtain from running:
     00000029  CD80              int 0x80
     
   
- ## Polymorphic shellcode
+ ## Polymorphic nasm code
 
 Length: 45 bytes
 
