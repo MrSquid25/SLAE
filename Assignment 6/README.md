@@ -14,4 +14,4 @@ The following three shellcodes where selected to be modified to solve this exerc
 
 2) [iptables](http://shell-storm.org/shellcode/files/shellcode-825.php)
 
-3) [root_shadow](http://shell-storm.org/shellcode/files/shellcode-211.php)
+3) [add root user](http://shell-storm.org/shellcode/files/shellcode-211.php)
