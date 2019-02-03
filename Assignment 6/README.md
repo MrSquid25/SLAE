@@ -3,7 +3,9 @@
 # What to do
 
 • Take up 3 shellcodes from ShellStorm and create polymorphic versions of them to beat paLern matching 
+
 • The polymorphic versions cannot be larger 150% of the exisSng shellcode
+
 • Bonus points for making it shorter in length than original
 
 # Solutions
