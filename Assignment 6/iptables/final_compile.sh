@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#Filename: final_compile.sh
+#Author:  MrSquid
+#Purpose: Assembler and linker of the nasm code. Compiler of the shellcode.c.
+#Usage: final_compile.sh filename 
+
 echo '[+] Assembling with Nasm ... '
 nasm -f elf32 -o $1.o $1.nasm
 
