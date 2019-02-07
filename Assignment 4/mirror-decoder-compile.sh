@@ -9,6 +9,7 @@ nasm -f elf32 -o mirror-decoder.o mirror-decoder.nasm
 
 echo '[+] Linking ...'
 ld -o mirror-decoder mirror-decoder.o
+rm mirror-decoder.o
 
 echo '[+] Done!'
 
