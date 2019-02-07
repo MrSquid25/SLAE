@@ -8,6 +8,7 @@ nasm -f elf32 -o Egg_Hunter.o Egg_Hunter.nasm
 
 echo '[+] Linking ...'
 ld -o Egg_Hunter Egg_Hunter.o
+rm Egg_Hunter.o
 
 echo '[+] Done!'
 
