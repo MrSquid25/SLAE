@@ -28,4 +28,4 @@ There are three files:
 
 3) main.sh
 
-       Script which, given a shellcode, cipher and decipher it using the python scripts showed before
+       Script which, given a shellcode, cipher and decipher it using the python scripts shown before
